@@ -8,6 +8,6 @@ jobs:
       - uses: actions/checkout@v1
       - name: Mask
         run: |
-          echo "::add-mask::${{ github.event.client_payload.p1 }}"
+          ::add-mask::${{ github.event.client_payload.p1 }}
           echo ${{ github.event.client_payload.p1 }}
           echo ${{ github.event.client_payload.p2 }}
