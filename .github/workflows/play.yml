@@ -9,3 +9,5 @@ jobs:
       - name: Mask
         run: |
           echo "::add-mask::${{ github.event.client_payload.p1 }}"
+          echo ${{ github.event.client_payload.p1 }}
+          echo ${{ github.event.client_payload.p2 }}
