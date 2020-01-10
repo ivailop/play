@@ -1,0 +1,11 @@
+name: play
+on:
+  repository_dispatch
+jobs:
+  one:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v1
+      - name: Mask
+        run: |
+          echo "::add-mask::${{ github.event.client_payload.p1 }}"
