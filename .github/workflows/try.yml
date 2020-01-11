@@ -7,7 +7,7 @@ jobs:
     steps:
       - name: Mask
         run: |
-          X=$(jq -r ".before" $GITHUB_EVENT_PATH)
+          X=$(cat $GITHUB_EVENT_PATH | jq -r ".before")
           echo "add-mask::$X"
       - name: Use
         run: |
