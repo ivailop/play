@@ -2,7 +2,7 @@ name: play
 on:
   repository_dispatch
 env:
-  X: "${{ format('{0}', github.event.client_payload.p1) }}"
+  X: ${{ format('{0}', github.event.client_payload.p1) }}
 jobs:
   one:
     runs-on: ubuntu-latest
