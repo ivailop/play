@@ -12,7 +12,7 @@ post_run() {
   curl -X POST $gh_dispatch_url \
   -H 'Content-Type: application/json' \
   -H 'Accept: application/vnd.github.everest-preview+json' \
-  -H "Authorization: token $GH_S2_TESTSPACE_TOKEN" \
+  -H "Authorization: token $GH_Admin" \
   -d "{
     \"event_type\": \"$event\",
     \"client_payload\": {

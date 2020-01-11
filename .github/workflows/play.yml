@@ -9,6 +9,8 @@ jobs:
       - name: Mask
         run: |
           echo "add-mask::${{ format('{0}', github.event.client_payload.p1) }}"
+      - name: Use
+        run: |
           echo ${{ github.event.client_payload.p1 }}
           echo ${{ github.event.client_payload.p2 }}
           MY_NAME="Mona The Octocat"
