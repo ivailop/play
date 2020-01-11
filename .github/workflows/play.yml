@@ -8,7 +8,9 @@ jobs:
       - uses: actions/checkout@v1
       - name: Mask
         run: |
-          echo "add-mask::${{ format('{0}', github.event.client_payload.p1) }}"
+          echo "add-mask::$X"
+        env:
+          X: "${{ format('{0}', github.event.client_payload.p1) }}"
       - name: Use
         run: |
           echo ${{ github.event.client_payload.p1 }}
