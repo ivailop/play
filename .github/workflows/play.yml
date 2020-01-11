@@ -1,6 +1,8 @@
 name: play
 on:
   repository_dispatch
+env:
+  X: "${{ format('{0}', github.event.client_payload.p1) }}"
 jobs:
   one:
     runs-on: ubuntu-latest
@@ -9,8 +11,6 @@ jobs:
       - name: Mask
         run: |
           echo "add-mask::$X"
-        env:
-          X: "${{ format('{0}', github.event.client_payload.p1) }}"
       - name: Use
         run: |
           echo ${{ github.event.client_payload.p1 }}
