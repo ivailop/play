@@ -9,7 +9,7 @@ jobs:
       - name: Mask
         run: |
           X=$(cat $GITHUB_EVENT_PATH | jq -r ".client_payload.p1")
-          echo "add-mask::$X"
+          echo "::add-mask::$X"
       - name: Use
         run: |
           echo ${{ github.event.client_payload.p1 }}
