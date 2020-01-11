@@ -8,7 +8,7 @@ jobs:
       - name: Mask
         run: |
           X=$(cat $GITHUB_EVENT_PATH | jq -r ".before")
-          echo "add-mask::$X"
+          echo "::add-mask::$X"
       - name: Use
         run: |
           echo ${{ github.event.before }}
