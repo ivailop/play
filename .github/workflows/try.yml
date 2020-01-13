@@ -1,0 +1,16 @@
+name: try
+on:
+  push
+jobs:
+  one:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Mask
+        run: |
+          X=$(cat $GITHUB_EVENT_PATH | jq -r ".before")
+          echo "::add-mask::$X"
+          echo "::add-mask::${{ github.event.after }}"
+      - name: Use
+        run: |
+          echo ${{ github.event.before }}
+          echo ${{ github.event.after }}
