@@ -1,10 +1,12 @@
 name: play
 on:
-  repository_dispatch
+  repository_dispatch:
+    types: [testspace]
 env:
   X: echo "add-mask::${{ github.event.client_payload.p1 }}"
 jobs:
   one:
+    if: ${{ github.event.client_payload.function == 'foo' }}
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v1
