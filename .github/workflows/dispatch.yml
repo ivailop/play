@@ -1,0 +1,14 @@
+name: dispatch
+on:
+  workflow_dispatch:
+    inputs:
+      name:
+        description: 'whatever'
+        required: false
+        default: 'some value'
+jobs:
+  one:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v1
+      - run: echo "blah blah..."
