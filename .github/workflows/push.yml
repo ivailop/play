@@ -1,0 +1,9 @@
+name: push
+on:
+  push
+jobs:
+  one:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v1
+      - run: echo "blah blah..."
