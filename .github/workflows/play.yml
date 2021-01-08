@@ -29,3 +29,4 @@ jobs:
       - name: Do wrong
         run: |
           >&2 echo "Summary: 28 passed, 14 failed, 0 not applicable, 0 errored, 2784.20 sec."
+          >&2 echo "Error: 28 passed, 14 failed, 0 not applicable, 0 errored, 2784.20 sec."
