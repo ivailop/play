@@ -1,5 +1,6 @@
 name: play
 on:
+  push:
   repository_dispatch:
     types: [testspace]
 env:
@@ -19,3 +20,6 @@ jobs:
           echo ${{ github.event.client_payload.p2 }}
           MY_NAME="Mona The Octocat"
           echo "::add-mask::$MY_NAME"
+      - name: Do
+        run: |
+          >&2 echo "Summary: 28 passed, 14 failed, 0 not applicable, 0 errored, 2784.20 sec."
