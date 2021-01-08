@@ -28,5 +28,5 @@ jobs:
           echo "Summary: 43 passed, 0 failed, 5 not applicable, 0 errored, 7684.20 sec."
       - name: Do wrong
         run: |
-          >&2 echo "Summary: 28 passed, 14 failed, 0 not applicable, 0 errored, 2784.20 sec."
-          >&2 echo "Error: 28 passed, 14 failed, 0 not applicable, 0 errored, 2784.20 sec."
+          echo "Summary: 28 passed, 14 failed, 0 not applicable, 0 errored, 2784.20 sec." 1>&2
+          echo "Error: 28 passed, 14 failed, 0 not applicable, 0 errored, 2784.20 sec." 1>&2
