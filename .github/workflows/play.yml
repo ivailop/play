@@ -28,4 +28,4 @@ jobs:
           echo "Summary: 43 passed, 0 failed, 5 not applicable, 0 errored, 7684.20 sec."
       - name: Do wrong
         run: |
-          echo "::error Summary: 28 passed, 14 failed, 0 not applicable, 0 errored, 2784.20 sec."
+          echo "::error::Summary: 28 passed, 14 failed, 0 not applicable, 0 errored, 2784.20 sec."
