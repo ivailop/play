@@ -16,4 +16,4 @@ jobs:
           bundle platform
       - name: install
         run: |
-          echo "::error::Summary: 28 passed, 14 failed, 0 not applicable, 0 errored, 2784.20 sec."
+          bundle install
