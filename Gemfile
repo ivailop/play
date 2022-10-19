@@ -2,6 +2,13 @@
 
 source 'https://rubygems.org'
 
+# XML parsing and manipulating
+gem 'nokogiri', '>= 1.12.5'
+
+# Bundle edge Rails instead: gem 'rails', :github => 'rails/rails'
+gem 'rails', '~> 6.1'
+
+
 # See https://github.com/sstephenson/execjs#readme for more supported runtimes
 # The versions are locked like this because of aproblem with compiling binaries on CentOS check:
 # https://github.com/rubyjs/mini_racer/issues/169
