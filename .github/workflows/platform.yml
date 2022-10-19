@@ -1,0 +1,19 @@
+name: platform
+on:
+  # push:
+  workflow_dispatch:
+jobs:
+  general:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - uses: actions/setup-ruby@v1
+        with:
+          ruby-version: '2.7' # Version range or exact version of a Ruby version to use, using semvers version range syntax.
+      - name: check
+        run: |
+          ruby --version
+          bundle platform
+      - name: install
+        run: |
+          echo "::error::Summary: 28 passed, 14 failed, 0 not applicable, 0 errored, 2784.20 sec."

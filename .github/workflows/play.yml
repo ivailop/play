@@ -1,6 +1,6 @@
 name: play
 on:
-  push:
+  # push:
   repository_dispatch:
     types: [testspace]
 env:
