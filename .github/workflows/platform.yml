@@ -6,7 +6,7 @@ jobs:
   general:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v3
       - uses: ruby/setup-ruby@v1
         with:
           ruby-version: '2.7' # Version range or exact version of a Ruby version to use, using semvers version range syntax.
@@ -16,4 +16,5 @@ jobs:
           bundle platform
       - name: install
         run: |
-          bundle install
+          bundle config set --local deployment 'true'
+          bundle install --retry=3 --jobs=4
