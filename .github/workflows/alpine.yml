@@ -1,0 +1,23 @@
+name: alpine
+on:
+  # push:
+  workflow_dispatch:
+jobs:
+  general:
+    runs-on: ubuntu-latest
+    container:
+      image: alpine:3.16
+    steps:
+      - name: gcompat
+        run: |
+          apk add gcompat curl libstdc++ git jq
+          uname -a
+          printenv
+      - uses: actions/checkout@v3
+      - name: testspace
+        run: |
+          curl -fsSL https://testspace-client.s3.amazonaws.com/testspace-linux.tgz | tar -zxvf- -C /usr/local/bin
+          testspace -v
+          git config --global --add safe.directory $GITHUB_WORKSPACE # see https://github.com/actions/checkout/pull/762
+          git rev-parse HEAD
+          testspace config ${{github.repository_owner}}.testspace.com --repo=none
