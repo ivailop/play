@@ -22,6 +22,8 @@ jobs:
           # git config --global --add safe.directory $GITHUB_WORKSPACE # see https://github.com/actions/checkout/pull/762
           # git rev-parse HEAD
           # testspace config url ${{github.repository_owner}}.testspace.com --repo=none
+          apk add scanelf
+          scanelf -i /usr/local/bin/testspace
           apk add valgrind
           valgrind --leak-check=full testspace help x
           valgrind --leak-check=full testspace config url ${{github.repository_owner}}.testspace.com --repo=none
