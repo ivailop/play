@@ -35,3 +35,4 @@ jobs:
             path: |
               /System/Library/Perl/5.30/darwin-thread-multi-2level/CORE
               /System/Library/Perl/5.30/**/config.h
+              /Library/Perl/5.30/**/config.h
