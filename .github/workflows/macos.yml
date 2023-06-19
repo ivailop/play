@@ -6,6 +6,10 @@ jobs:
   general:
     runs-on: macos-11
     steps:
+      - name: setup
+        run: |
+          bash -c "sudo xcode-select -s /Applications/Xcode_11.7.app/Contents/Developer"
+          SDKROOT=`xcrun --sdk macosx --show-sdk-path`
       - name: echo
         run: |
           uname -a
