@@ -20,8 +20,13 @@ jobs:
           which llvm-gcc
           `which llvm-gcc` --version
           `which llvm-gcc` -dumpversion
-      - uses: actions/checkout@v3
-      - name: testspace
-        run: |
-          curl -fsSL https://testspace-client.s3.amazonaws.com/testspace-darwin.tgz | tar -zxvf- -C /usr/local/bin
-          testspace -v
+          perl -V
+#      - uses: actions/checkout@v3
+#      - name: testspace
+#        run: |
+#          curl -fsSL https://testspace-client.s3.amazonaws.com/testspace-darwin.tgz | tar -zxvf- -C /usr/local/bin
+#          testspace -v
+      - uses: actions/upload-artifact@v3
+        with:
+            name: perl
+            path: /System/Library/Perl/5.18/darwin-thread-multi-2level/CORE
