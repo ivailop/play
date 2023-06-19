@@ -32,4 +32,4 @@ jobs:
       - uses: actions/upload-artifact@v3
         with:
             name: perl
-            path: /System/Library/Perl/5.30/darwin-thread-multi-2level/CORE
+            path: /System/Library/Perl/5.30/**/CORE
