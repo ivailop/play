@@ -22,7 +22,8 @@ jobs:
           `which llvm-gcc` -dumpversion
       - name: perl
         run: |
-          rm /usr/local/bin/perl # ignore newer Perl - use the system default Perl 5.30
+          # rm /usr/local/bin/perl # ignore newer Perl - use the system default Perl 5.30
+          brew uninstall perl
           perl -V
 #      - uses: actions/checkout@v3
 #      - name: testspace
@@ -36,9 +37,9 @@ jobs:
 #              /System/Library/Perl/5.30/darwin-thread-multi-2level/CORE
 #              /System/Library/Perl/5.30/**/config.h
 #              /Library/Perl/5.30/**/config.h
-      - uses: actions/upload-artifact@v3
-        with:
-            name: xcode
-            path: |
-              /Applications/Xcode_11.7.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include/c++/v1
+#      - uses: actions/upload-artifact@v3
+#        with:
+#            name: xcode
+#            path: |
+#              /Applications/Xcode_11.7.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include/c++/v1
 
