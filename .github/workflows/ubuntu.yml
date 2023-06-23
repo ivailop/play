@@ -1,0 +1,32 @@
+name: macos
+on:
+  # push:
+  workflow_dispatch:
+jobs:
+  general:
+    runs-on: ubuntu-latest
+    steps:
+      - name: echo
+        run: |
+          uname -a
+          printenv
+      - name: gcc
+        run: |
+          which gcc
+          `which gcc` --version
+          `which gcc` -dumpversion
+      - name: perl
+        run: |
+          perl -V
+#      - uses: actions/checkout@v3
+#      - name: testspace
+#        run: |
+#          curl -fsSL https://testspace-client.s3.amazonaws.com/testspace-linux.tgz | tar -zxvf- -C /usr/local/bin
+#          testspace -v
+       - uses: actions/upload-artifact@v3
+         with:
+          name: perl
+          path: |
+            /usr/lib/x86_64-linux-gnu/perl/5.30.0/CORE
+            /usr/lib/x86_64-linux-gnu/perl5/5.30/libperl*
+
