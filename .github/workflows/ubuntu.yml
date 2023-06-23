@@ -1,4 +1,4 @@
-name: macos
+name: ubuntu
 on:
   # push:
   workflow_dispatch:
@@ -23,10 +23,10 @@ jobs:
 #        run: |
 #          curl -fsSL https://testspace-client.s3.amazonaws.com/testspace-linux.tgz | tar -zxvf- -C /usr/local/bin
 #          testspace -v
-       - uses: actions/upload-artifact@v3
-         with:
-           name: perl
-           path: |
-             /usr/lib/x86_64-linux-gnu/perl/5.30.0/CORE
-             /usr/lib/x86_64-linux-gnu/perl5/5.30/libperl*
+      - uses: actions/upload-artifact@v3
+        with:
+          name: perl
+          path: |
+            /usr/lib/x86_64-linux-gnu/perl/5.30.0/CORE
+            /usr/lib/x86_64-linux-gnu/perl5/5.30/libperl*
 
