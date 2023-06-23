@@ -27,6 +27,6 @@ jobs:
         with:
           name: perl
           path: |
-            /usr/lib/x86_64-linux-gnu/perl/5.30.0/CORE
-            /usr/lib/x86_64-linux-gnu/perl5/5.30/libperl*
+            /usr/lib/x86_64-linux-gnu/perl/5.34.0/CORE
+            /usr/lib/x86_64-linux-gnu/perl5/5.34/libperl*
 
