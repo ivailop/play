@@ -25,8 +25,8 @@ jobs:
 #          testspace -v
        - uses: actions/upload-artifact@v3
          with:
-          name: perl
-          path: |
-            /usr/lib/x86_64-linux-gnu/perl/5.30.0/CORE
-            /usr/lib/x86_64-linux-gnu/perl5/5.30/libperl*
+           name: perl
+           path: |
+             /usr/lib/x86_64-linux-gnu/perl/5.30.0/CORE
+             /usr/lib/x86_64-linux-gnu/perl5/5.30/libperl*
 
