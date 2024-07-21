@@ -1,0 +1,194 @@
+name: cicd
+on: [workflow_dispatch]
+env:
+  PIPELINE_VERSION: '0.3.8'
+jobs:
+
+  init:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: env info
+        run: |
+          printenv
+      - name: job infos
+        run: |
+          curl -s -H "Accept: application/vnd.github+json" ${GITHUB_API_URL}/repos/${GITHUB_REPOSITORY}/actions/runs/${GITHUB_RUN_ID}/jobs?filter=all | jq -r ".total_count, .jobs[].status"
+          sleep 10
+          curl -s -H "Accept: application/vnd.github+json" ${GITHUB_API_URL}/repos/${GITHUB_REPOSITORY}/actions/runs/${GITHUB_RUN_ID}/jobs?filter=all | jq -r ".total_count, .jobs[].status"
+          curl -s -H "Accept: application/vnd.github+json" ${GITHUB_API_URL}/repos/${GITHUB_REPOSITORY}/actions/runs/${GITHUB_RUN_ID} | jq -r ".status"
+
+  java:
+    runs-on: ubuntu-latest
+    needs: init
+    steps:
+      - uses: actions/checkout@v4
+      - name: job infos
+        run: |
+          curl -s -H "Accept: application/vnd.github+json" ${GITHUB_API_URL}/repos/${GITHUB_REPOSITORY}/actions/runs/${GITHUB_RUN_ID}/jobs | jq -r ".total_count, .jobs[].status"
+          sleep 10
+          curl -s -H "Accept: application/vnd.github+json" ${GITHUB_API_URL}/repos/${GITHUB_REPOSITORY}/actions/runs/${GITHUB_RUN_ID}/jobs | jq -r ".total_count, .jobs[].status"
+          curl -s -H "Accept: application/vnd.github+json" ${GITHUB_API_URL}/repos/${GITHUB_REPOSITORY}/actions/runs/${GITHUB_RUN_ID} | jq -r ".status"
+
+  frontend:
+    runs-on: ubuntu-latest
+    needs: init
+    steps:
+      - uses: actions/checkout@v4
+      - name: job infos
+        run: |
+          curl -s -H "Accept: application/vnd.github+json" ${GITHUB_API_URL}/repos/${GITHUB_REPOSITORY}/actions/runs/${GITHUB_RUN_ID}/jobs | jq -r ".total_count, .jobs[].status"
+          sleep 10
+          curl -s -H "Accept: application/vnd.github+json" ${GITHUB_API_URL}/repos/${GITHUB_REPOSITORY}/actions/runs/${GITHUB_RUN_ID}/jobs | jq -r ".total_count, .jobs[].status"
+          curl -s -H "Accept: application/vnd.github+json" ${GITHUB_API_URL}/repos/${GITHUB_REPOSITORY}/actions/runs/${GITHUB_RUN_ID} | jq -r ".status"
+
+  test-frontend:
+    name: test (frontend)
+    runs-on: ubuntu-latest
+    needs: [init, frontend]
+    steps:
+      - uses: actions/checkout@v4
+      - name: job infos
+        run: |
+          curl -s -H "Accept: application/vnd.github+json" ${GITHUB_API_URL}/repos/${GITHUB_REPOSITORY}/actions/runs/${GITHUB_RUN_ID}/jobs | jq -r ".total_count, .jobs[].status"
+          sleep 10
+          curl -s -H "Accept: application/vnd.github+json" ${GITHUB_API_URL}/repos/${GITHUB_REPOSITORY}/actions/runs/${GITHUB_RUN_ID}/jobs | jq -r ".total_count, .jobs[].status"
+          curl -s -H "Accept: application/vnd.github+json" ${GITHUB_API_URL}/repos/${GITHUB_REPOSITORY}/actions/runs/${GITHUB_RUN_ID} | jq -r ".status"
+
+  backend:
+    runs-on: ubuntu-latest
+    needs: [init, java]
+    steps:
+      - uses: actions/checkout@v4
+      - name: job infos
+        run: |
+          curl -s -H "Accept: application/vnd.github+json" ${GITHUB_API_URL}/repos/${GITHUB_REPOSITORY}/actions/runs/${GITHUB_RUN_ID}/jobs | jq -r ".total_count, .jobs[].status"
+          sleep 10
+          curl -s -H "Accept: application/vnd.github+json" ${GITHUB_API_URL}/repos/${GITHUB_REPOSITORY}/actions/runs/${GITHUB_RUN_ID}/jobs | jq -r ".total_count, .jobs[].status"
+          curl -s -H "Accept: application/vnd.github+json" ${GITHUB_API_URL}/repos/${GITHUB_REPOSITORY}/actions/runs/${GITHUB_RUN_ID} | jq -r ".status"
+
+  procurement:
+    runs-on: ubuntu-latest
+    needs: [ init, java ]
+    steps:
+      - uses: actions/checkout@v4
+      - name: job infos
+        run: |
+          curl -s -H "Accept: application/vnd.github+json" ${GITHUB_API_URL}/repos/${GITHUB_REPOSITORY}/actions/runs/${GITHUB_RUN_ID}/jobs | jq -r ".total_count, .jobs[].status"
+          sleep 10
+          curl -s -H "Accept: application/vnd.github+json" ${GITHUB_API_URL}/repos/${GITHUB_REPOSITORY}/actions/runs/${GITHUB_RUN_ID}/jobs | jq -r ".total_count, .jobs[].status"
+          curl -s -H "Accept: application/vnd.github+json" ${GITHUB_API_URL}/repos/${GITHUB_REPOSITORY}/actions/runs/${GITHUB_RUN_ID} | jq -r ".status"
+
+  compatibility-images:
+    runs-on: ubuntu-latest
+    needs: [init, frontend, backend]
+    steps:
+      - uses: actions/checkout@v4
+      - name: job infos
+        run: |
+          curl -s -H "Accept: application/vnd.github+json" ${GITHUB_API_URL}/repos/${GITHUB_REPOSITORY}/actions/runs/${GITHUB_RUN_ID}/jobs | jq -r ".total_count, .jobs[].status"
+          sleep 10
+          curl -s -H "Accept: application/vnd.github+json" ${GITHUB_API_URL}/repos/${GITHUB_REPOSITORY}/actions/runs/${GITHUB_RUN_ID}/jobs | jq -r ".total_count, .jobs[].status"
+          curl -s -H "Accept: application/vnd.github+json" ${GITHUB_API_URL}/repos/${GITHUB_REPOSITORY}/actions/runs/${GITHUB_RUN_ID} | jq -r ".status"
+
+  junit:
+    name: test (java)
+    runs-on: ubuntu-latest
+    needs: [init, java]
+    steps:
+      - uses: actions/checkout@v4
+      - name: job infos
+        run: |
+          curl -s -H "Accept: application/vnd.github+json" ${GITHUB_API_URL}/repos/${GITHUB_REPOSITORY}/actions/runs/${GITHUB_RUN_ID}/jobs | jq -r ".total_count, .jobs[].status"
+          sleep 10
+          curl -s -H "Accept: application/vnd.github+json" ${GITHUB_API_URL}/repos/${GITHUB_REPOSITORY}/actions/runs/${GITHUB_RUN_ID}/jobs | jq -r ".total_count, .jobs[].status"
+          curl -s -H "Accept: application/vnd.github+json" ${GITHUB_API_URL}/repos/${GITHUB_REPOSITORY}/actions/runs/${GITHUB_RUN_ID} | jq -r ".status"
+
+  cucumber-build:
+    name: build (cucumber)
+    runs-on: ubuntu-latest
+    needs: [init, java]
+    steps:
+      - uses: actions/checkout@v4
+      - name: job infos
+        run: |
+          curl -s -H "Accept: application/vnd.github+json" ${GITHUB_API_URL}/repos/${GITHUB_REPOSITORY}/actions/runs/${GITHUB_RUN_ID}/jobs | jq -r ".total_count, .jobs[].status"
+          sleep 10
+          curl -s -H "Accept: application/vnd.github+json" ${GITHUB_API_URL}/repos/${GITHUB_REPOSITORY}/actions/runs/${GITHUB_RUN_ID}/jobs | jq -r ".total_count, .jobs[].status"
+          curl -s -H "Accept: application/vnd.github+json" ${GITHUB_API_URL}/repos/${GITHUB_REPOSITORY}/actions/runs/${GITHUB_RUN_ID} | jq -r ".status"
+
+  cucumber-run:
+    name: test (cucumber)
+    runs-on: ubuntu-latest
+    needs: [init, backend, frontend, cucumber-build]
+    strategy:
+      max-parallel: 10
+      fail-fast: false
+      matrix:
+        profile: [ profile1, profile2, profile3, profile4, profile5, profile6, profile7, catchall ]
+        include:
+          - profile: profile1
+            params: -Dcucumber.filter.tags="@ghActions:run_on_executor1 and not @flaky and not @ignore"
+          - profile: profile2
+            params: -Dcucumber.filter.tags="@ghActions:run_on_executor2 and not @flaky and not @ignore"
+          - profile: profile3
+            params: -Dcucumber.filter.tags="@ghActions:run_on_executor3 and not @flaky and not @ignore"
+          - profile: profile4
+            params: -Dcucumber.filter.tags="@ghActions:run_on_executor4 and not @flaky and not @ignore"
+          - profile: profile5
+            params: -Dcucumber.filter.tags="@ghActions:run_on_executor5 and not @flaky and not @ignore"
+          - profile: profile6
+            params: -Dcucumber.filter.tags="@ghActions:run_on_executor6 and not @flaky and not @ignore"
+          - profile: profile7
+            params: -Dcucumber.filter.tags="@ghActions:run_on_executor7 and not @flaky and not @ignore"
+          #          - profile: flaky
+          #            params: -Dcucumber.filter.tags="@flaky and not @ignore"
+          - profile: catchall
+            params: -Dcucumber.filter.tags="not @ghActions:run_on_executor1 and not @ghActions:run_on_executor2 and not @ghActions:run_on_executor3 and not @ghActions:run_on_executor4 and not @ghActions:run_on_executor5 and not @ghActions:run_on_executor6 and not @ghActions:run_on_executor7 and not @ignore and not @flaky"
+    steps:
+      - uses: actions/checkout@v4
+      - name: job infos
+        run: |
+          curl -s -H "Accept: application/vnd.github+json" ${GITHUB_API_URL}/repos/${GITHUB_REPOSITORY}/actions/runs/${GITHUB_RUN_ID}/jobs | jq -r ".total_count, .jobs[].status"
+          sleep 10
+          curl -s -H "Accept: application/vnd.github+json" ${GITHUB_API_URL}/repos/${GITHUB_REPOSITORY}/actions/runs/${GITHUB_RUN_ID}/jobs | jq -r ".total_count, .jobs[].status"
+          curl -s -H "Accept: application/vnd.github+json" ${GITHUB_API_URL}/repos/${GITHUB_REPOSITORY}/actions/runs/${GITHUB_RUN_ID} | jq -r ".status"
+
+  health_check:
+    name: health check
+    runs-on: ubuntu-latest
+    needs: [ init, backend, frontend ]
+    steps:
+      - uses: actions/checkout@v4
+      - name: job infos
+        run: |
+          curl -s -H "Accept: application/vnd.github+json" ${GITHUB_API_URL}/repos/${GITHUB_REPOSITORY}/actions/runs/${GITHUB_RUN_ID}/jobs | jq -r ".total_count, .jobs[].status"
+          sleep 10
+          curl -s -H "Accept: application/vnd.github+json" ${GITHUB_API_URL}/repos/${GITHUB_REPOSITORY}/actions/runs/${GITHUB_RUN_ID}/jobs | jq -r ".total_count, .jobs[].status"
+          curl -s -H "Accept: application/vnd.github+json" ${GITHUB_API_URL}/repos/${GITHUB_REPOSITORY}/actions/runs/${GITHUB_RUN_ID} | jq -r ".status"
+
+  redeploy:
+    runs-on: ubuntu-latest
+    needs: [init, backend, frontend]
+    environment: 'dev'
+    steps:
+      - name: job infos
+        run: |
+          curl -s -H "Accept: application/vnd.github+json" ${GITHUB_API_URL}/repos/${GITHUB_REPOSITORY}/actions/runs/${GITHUB_RUN_ID}/jobs?filter=all | jq -r ".total_count, .jobs[].status"
+          sleep 10
+          curl -s -H "Accept: application/vnd.github+json" ${GITHUB_API_URL}/repos/${GITHUB_REPOSITORY}/actions/runs/${GITHUB_RUN_ID}/jobs?filter=all | jq -r ".total_count, .jobs[].status"
+          curl -s -H "Accept: application/vnd.github+json" ${GITHUB_API_URL}/repos/${GITHUB_REPOSITORY}/actions/runs/${GITHUB_RUN_ID} | jq -r ".status"
+
+  update-base-version:
+    if: needs.init.outputs.base-version-matrix != ''
+    runs-on: ubuntu-latest
+    needs: [init, compatibility-images]
+    strategy:
+      matrix: ${{fromJSON(needs.init.outputs.base-version-matrix)}}
+    steps:
+      - name: job infos
+        run: |
+          curl -s -H "Accept: application/vnd.github+json" ${GITHUB_API_URL}/repos/${GITHUB_REPOSITORY}/actions/runs/${GITHUB_RUN_ID}/jobs | jq -r ".total_count, .jobs[].status"
+          sleep 10
+          curl -s -H "Accept: application/vnd.github+json" ${GITHUB_API_URL}/repos/${GITHUB_REPOSITORY}/actions/runs/${GITHUB_RUN_ID}/jobs | jq -r ".total_count, .jobs[].status"
+          curl -s -H "Accept: application/vnd.github+json" ${GITHUB_API_URL}/repos/${GITHUB_REPOSITORY}/actions/runs/${GITHUB_RUN_ID} | jq -r ".status"
